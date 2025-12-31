@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "npx prisma db seed",
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio",
+    "migrate": "npx prisma migrate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
