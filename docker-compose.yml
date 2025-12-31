@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: sudip
+      POSTGRES_PASSWORD: sudip
+      POSTGRES_DB: better_auth_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks: # Added this to ensure it can talk to 'db'
+      - app_network
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: bridge
