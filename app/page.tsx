@@ -2,31 +2,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
+import prisma from "@/lib/db";
+import { Feature } from "@/lib/generated/prisma/client";
 
-const features = [
-  {
-    title: "Next.js",
-    description:
-      "Modern React framework with App Router, Server Actions, and edge-ready performance.",
-  },
-  {
-    title: "Docker",
-    description:
-      "Containerized development and production environments for consistency and scalability.",
-  },
-  {
-    title: "Prisma",
-    description:
-      "Type-safe ORM with schema-first design and powerful database tooling.",
-  },
-  {
-    title: "Better Auth",
-    description:
-      "Secure, extensible authentication with sessions, providers, and best practices.",
-  },
-];
+async function getFeaturesSafe(): Promise<Feature[]> {
+  try {
+    return await prisma.feature.findMany();
+  } catch {
+    return [];
+  }
+}
 
-const HomePage = () => {
+const HomePage = async () => {
+  const features = await getFeaturesSafe();
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* Header */}
