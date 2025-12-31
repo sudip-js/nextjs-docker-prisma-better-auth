@@ -1,90 +1,84 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
+
 const features = [
   {
     title: "Next.js",
     description:
-      "Production-ready React framework with App Router, Server Actions, and optimized performance.",
-    icon: "⚡",
-    gradient: "from-blue-500 to-cyan-500",
+      "Modern React framework with App Router, Server Actions, and edge-ready performance.",
   },
   {
     title: "Docker",
     description:
-      "Containerized environment for consistent development, testing, and production deployment.",
-    icon: "🐳",
-    gradient: "from-sky-500 to-blue-600",
+      "Containerized development and production environments for consistency and scalability.",
   },
   {
     title: "Prisma",
     description:
-      "Type-safe ORM with schema-first approach and seamless database migrations.",
-    icon: "🧩",
-    gradient: "from-indigo-500 to-purple-600",
+      "Type-safe ORM with schema-first design and powerful database tooling.",
   },
   {
     title: "Better Auth",
     description:
-      "Secure authentication with modern flows, session handling, and extensible providers.",
-    icon: "🔐",
-    gradient: "from-emerald-500 to-teal-600",
+      "Secure, extensible authentication with sessions, providers, and best practices.",
   },
 ];
 
 const HomePage = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white">
-      {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-6 py-20 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Production-Grade{" "}
-          <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Next.js Stack
-          </span>
+    <main className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="flex items-center justify-between px-6 py-4 border-b">
+        <span className="font-semibold tracking-tight">Next.js Stack</span>
+        <ThemeToggle />
+      </header>
+
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-6 py-20 text-center">
+        <Badge variant="outline" className="mb-4">
+          Production Ready Stack
+        </Badge>
+
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+          Next.js Authentication Platform
         </h1>
 
-        <p className="mt-6 max-w-2xl mx-auto text-slate-400 text-lg">
-          A modern, scalable boilerplate powered by Next.js, Docker, Prisma, and
-          secure authentication—built for real-world applications.
+        <p className="mt-6 max-w-2xl mx-auto text-muted-foreground text-lg">
+          A clean, scalable, and secure starter built with Next.js, Docker,
+          Prisma, and Better Auth—designed for real-world production apps.
         </p>
 
         <div className="mt-10 flex justify-center gap-4">
-          <button className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold hover:bg-blue-500 transition">
-            Get Started
-          </button>
-          <button className="rounded-xl border border-slate-700 px-6 py-3 text-sm font-semibold hover:bg-slate-800 transition">
-            View Docs
-          </button>
+          <Button size="lg">Get Started</Button>
+          <Button size="lg" variant="outline">
+            Documentation
+          </Button>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="mx-auto max-w-7xl px-6 pb-24">
+      {/* Features */}
+      <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur transition hover:border-slate-600"
-            >
-              <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition bg-gradient-to-br ${feature.gradient}`}
-              />
-
-              <div className="relative z-10">
-                <div className="mb-4 text-4xl">{feature.icon}</div>
-
-                <h3 className="text-xl font-semibold">{feature.title}</h3>
-
-                <p className="mt-2 text-sm text-slate-400 leading-relaxed">
+            <Card key={feature.title}>
+              <CardHeader>
+                <CardTitle className="text-lg">{feature.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-6 text-center text-sm text-slate-500">
-        Built for production • Secure • Scalable • Developer-friendly
+      <footer className="border-t py-6 text-center text-sm text-muted-foreground">
+        Built with shadcn/ui • Accessible • Production-grade
       </footer>
     </main>
   );
